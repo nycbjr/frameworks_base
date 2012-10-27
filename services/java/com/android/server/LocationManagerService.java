@@ -2455,7 +2455,6 @@ public class LocationManagerService extends ILocationManager.Stub implements Run
      * Return true if in blacklist, and not in whitelist.
      */
     private boolean inBlacklist(String packageName) {
-        /*
         synchronized (mLock) {
             for (String black : mBlacklist) {
                 if (packageName.startsWith(black)) {
@@ -2469,7 +2468,6 @@ public class LocationManagerService extends ILocationManager.Stub implements Run
                 }
             }
         }
-        */
         return false;
     }
 
@@ -2477,15 +2475,12 @@ public class LocationManagerService extends ILocationManager.Stub implements Run
      * Return true if any of packages are in whitelist
      */
     private boolean inWhitelist(String pkg) {
-        /*
         synchronized (mLock) {
             for (String white : mWhitelist) {
                 if (pkg.startsWith(white)) return true;
             }
         }
         return false;
-        */
-        return true;
     }
 
     private void checkPackageName(int uid, String packageName) {
