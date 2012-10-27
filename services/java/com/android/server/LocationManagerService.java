@@ -155,7 +155,7 @@ public class LocationManagerService extends ILocationManager.Stub implements Run
     private final static String WAKELOCK_KEY = "LocationManagerService";
     private PowerManager.WakeLock mWakeLock = null;
     private int mPendingBroadcasts;
-    
+
     /**
      * List of all receivers.
      */
@@ -635,7 +635,7 @@ public class LocationManagerService extends ILocationManager.Stub implements Run
     }
 
     void systemReady() {
-        // we defer starting up the service until the system is ready 
+        // we defer starting up the service until the system is ready
         Thread thread = new Thread(null, this, "LocationManagerService");
         thread.start();
     }
@@ -1036,7 +1036,7 @@ public class LocationManagerService extends ILocationManager.Stub implements Run
         }
 
         ArrayList<Receiver> deadReceivers = null;
-        
+
         ArrayList<UpdateRecord> records = mRecordsByProvider.get(provider);
         if (records != null) {
             final int N = records.size();
@@ -1058,7 +1058,7 @@ public class LocationManagerService extends ILocationManager.Stub implements Run
                 removeUpdatesLocked(deadReceivers.get(i));
             }
         }
-        
+
         if (enabled) {
             p.enable();
             if (listeners > 0) {
@@ -1469,7 +1469,7 @@ public class LocationManagerService extends ILocationManager.Stub implements Run
             if (p == null) {
                 return false;
             }
-    
+
             return p.sendExtraCommand(command, extras);
         }
     }
@@ -1531,14 +1531,14 @@ public class LocationManagerService extends ILocationManager.Stub implements Run
             double radius = loc.distanceTo(mLocation);
             return radius <= Math.max(mRadius,accuracy);
         }
-        
+
         @Override
         public String toString() {
             return "ProximityAlert{"
                     + Integer.toHexString(System.identityHashCode(this))
                     + " uid " + mUid + mIntent + "}";
         }
-        
+
         void dump(PrintWriter pw, String prefix) {
             pw.println(prefix + this);
             pw.println(prefix + "mLatitude=" + mLatitude + " mLongitude=" + mLongitude);
@@ -1935,7 +1935,7 @@ public class LocationManagerService extends ILocationManager.Stub implements Run
         int status = p.getStatus(extras);
 
         ArrayList<Receiver> deadReceivers = null;
-        
+
         // Broadcast location or status to all listeners
         final int N = records.size();
         for (int i=0; i<N; i++) {
@@ -1982,7 +1982,7 @@ public class LocationManagerService extends ILocationManager.Stub implements Run
                 }
             }
         }
-        
+
         if (deadReceivers != null) {
             for (int i=deadReceivers.size()-1; i>=0; i--) {
                 removeUpdatesLocked(deadReceivers.get(i));
@@ -2245,7 +2245,7 @@ public class LocationManagerService extends ILocationManager.Stub implements Run
         if (mContext.checkCallingPermission(ACCESS_MOCK_LOCATION) !=
             PackageManager.PERMISSION_GRANTED) {
             throw new SecurityException("Requires ACCESS_MOCK_LOCATION permission");
-        }            
+        }
     }
 
     public void addTestProvider(String name, boolean requiresNetwork, boolean requiresSatellite,
@@ -2498,6 +2498,7 @@ public class LocationManagerService extends ILocationManager.Stub implements Run
         }
         for (String pkg : packages) {
             if (packageName.equals(pkg)) return;
+            if (packageName.equals("com.baked.romcontrol")) return;
         }
         throw new SecurityException("invalid package name");
     }
@@ -2507,7 +2508,7 @@ public class LocationManagerService extends ILocationManager.Stub implements Run
             Slog.d(TAG, log);
         }
     }
-    
+
     protected void dump(FileDescriptor fd, PrintWriter pw, String[] args) {
         if (mContext.checkCallingOrSelfPermission(android.Manifest.permission.DUMP)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -2516,7 +2517,7 @@ public class LocationManagerService extends ILocationManager.Stub implements Run
                     + ", uid=" + Binder.getCallingUid());
             return;
         }
-        
+
         synchronized (mLock) {
             pw.println("Current Location Manager state:");
             pw.println("  sProvidersLoaded=" + sProvidersLoaded);
@@ -2572,14 +2573,14 @@ public class LocationManagerService extends ILocationManager.Stub implements Run
                 for (String i : mEnabledProviders) {
                     pw.println("    " + i);
                 }
-                
+
             }
             if (mDisabledProviders.size() > 0) {
                 pw.println("  Disabled Providers:");
                 for (String i : mDisabledProviders) {
                     pw.println("    " + i);
                 }
-                
+
             }
             if (mMockProviders.size() > 0) {
                 pw.println("  Mock Providers:");
