@@ -53,7 +53,7 @@ class NotificationWallpaper extends FrameLayout {
                     mNotificationWallpaperImage = new ImageView(getContext());
                     mNotificationWallpaperImage.setScaleType(ScaleType.CENTER_CROP);
                     addView(mNotificationWallpaperImage, -1, -1);
-                    Context settingsContext = mContext.createPackageContext("com.baked.romcontrol", 0);
+                    Context settingsContext = mContext.createPackageContext("com.empire.romcontrol", 0);
                     String wallpaperFile = settingsContext.getFilesDir() + "/notifwallpaper";
                     bitmapWallpaper = BitmapFactory.decodeFile(wallpaperFile);
                     Drawable d = new BitmapDrawable(getResources(), bitmapWallpaper);
